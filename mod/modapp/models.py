@@ -36,3 +36,6 @@ class FullOffer(models.Model):
     VACANCY = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
     REGION = models.ForeignKey(Region, on_delete=models.CASCADE)
     SKILLS = models.ForeignKey(Skills, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.numberOffer, self.VACANCY, self.REGION, self.SKILLS
