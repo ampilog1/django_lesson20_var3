@@ -38,4 +38,4 @@ class FullOffer(models.Model):
     SKILLS = models.ForeignKey(Skills, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.numberOffer, self.VACANCY, self.REGION, self.SKILLS
+        return '%s %s %s %s' % (self.numberOffer, self.VACANCY, self.REGION, self.SKILLS)

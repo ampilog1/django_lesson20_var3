@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from modapp.models import Region, Vacancy, Skills, NumberOffer, FullOffer
 import sqlite3
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
 
@@ -30,7 +31,6 @@ class Command(BaseCommand):
         for row in cursor.execute('SELECT number_offer, vacancy, region, skill FROM full_offer ORDER BY number_offer'):
             full_offer_list.append(row)
 
-
         # for reg in region_sql:
         #     region1 = Region.objects.create(name=reg[0])
         #
@@ -44,7 +44,19 @@ class Command(BaseCommand):
         #     number_offer1 = NumberOffer.objects.create(name=num[0])
 
         # for ful in full_offer_list:
-        full_offer1 = FullOffer.objects.all()
-        print(full_offer1)
+        # full_offer1 = FullOffer.objects.all()
+        # print(full_offer1)
 
-            # full_offer1.update(numberOffer=ful[0], VACANCY=ful[1], REGION=ful[2], SKILLS=ful[3])
+        # full_offer1.update(numberOffer=ful[0], VACANCY=ful[1], REGION=ful[2], SKILLS=ful[3])
+        for ful in full_offer_list:
+            number1 = NumberOffer.objects.get(id=ful[0])
+            # vacancy1 = Vacancy.objects.get(id=ful[1])
+            # region1 = Region.objects.get(id=ful[2])
+            # skills1 = Skills.objects.get(id=ful[3])
+
+            FullOffer.numberOffer = number1
+            # FullOffer.VACANCY = vacancy1
+            # FullOffer.REGION = region1
+            # FullOffer.SKILLS = skills1
+
+            FullOffer.save()
