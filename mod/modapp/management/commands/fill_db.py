@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from modapp.models import Region, Vacancy, Skills, NumberOffer, FullOffer
 import sqlite3
 
-
+#Извлекаем данные из тестовой базы и перезаливаем их в базу данных Django через созданную модель
 class Command(BaseCommand):
     def handle(self, *args, **options):
 
@@ -30,7 +30,7 @@ class Command(BaseCommand):
         full_offer_list = []
         for row in cursor.execute('SELECT number_offer, vacancy, region, skill FROM full_offer ORDER BY number_offer'):
             full_offer_list.append(row)
-
+#заполняем базу нашей модели
         for reg in region_sql:
             region1 = Region.objects.create(name=reg[0])
 

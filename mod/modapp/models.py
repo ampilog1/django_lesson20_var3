@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here.
-
+# Создаем модель нашей базы данных
 class Region(models.Model):
     name = models.CharField(max_length=32, unique=True)
 
