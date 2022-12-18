@@ -5,7 +5,7 @@ import sqlite3
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-# извлекаем данные  из тестовой базы
+# извлекаем данные  из тестовой ,fps
         conn = sqlite3.connect('TestDB.db')
 
         # Создаем курсор
