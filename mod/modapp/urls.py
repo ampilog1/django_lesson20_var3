@@ -5,4 +5,5 @@ app_name = 'modapp'
 
 urlpatterns = [
     path('', views.main_view),
+    path('create/', views.create_post)
 ]
