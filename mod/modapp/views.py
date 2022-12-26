@@ -9,3 +9,7 @@ def main_view(request):
 
 def create_post(request):
     return render(request, 'modapp/create.html')
+
+def post(request, id):
+    fulls = FullOffer.objects.get(id=id)
+    return render(request, 'modapp/create.html', context={'fulls': fulls})
