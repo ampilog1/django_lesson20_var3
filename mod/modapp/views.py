@@ -12,4 +12,4 @@ def create_post(request):
 
 def post(request, id):
     fulls = FullOffer.objects.get(id=id)
-    return render(request, 'modapp/create.html', context={'fulls': fulls})
+    return render(request, 'modapp/post.html', context={'fulls': fulls})
