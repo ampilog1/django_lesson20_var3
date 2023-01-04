@@ -1,3 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from .models import FullOffer
+from .forms import ContactForm
+from django.core.mail import send_mail
+
 
 # Create your views here.
+def main_view(request):
+    fulls = FullOffer.objects.all()
+    return render(request, 'modapp/index.html', context={'fulls': fulls})
+
+def create_post(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Получить данные из форы
+            name = form.cleaned_data['name']
+            message = form.cleaned_data['message']
+            email = form.cleaned_data['email']
+
+            send_mail(
+                'Contact message',
+                f'Ваш сообщение {message} принято',
+                'from@example.com',
+                [email],
+                fail_silently=True,
+            )
+
+            return HttpResponseRedirect(reverse('mod:index'))
+        else:
+            return render(request, 'modapp/create.html', context={'form': form})
+    else:
+        form = ContactForm()
+    return render(request, 'modapp/create.html', context={'form': form})
+
+def post(request, id):
+    fulls = FullOffer.objects.get(id=id)
+    return render(request, 'modapp/post.html', context={'fulls': fulls})
