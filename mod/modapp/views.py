@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .models import FullOffer
-from .forms import ContactForm
+from .forms import ContactForm, PostForm
 from django.core.mail import send_mail
+from django.urls import reverse
 
 
 # Create your views here.
@@ -9,7 +10,7 @@ def main_view(request):
     fulls = FullOffer.objects.all()
     return render(request, 'modapp/index.html', context={'fulls': fulls})
 
-def create_post(request):
+def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -28,11 +29,16 @@ def create_post(request):
 
             return HttpResponseRedirect(reverse('mod:index'))
         else:
-            return render(request, 'modapp/create.html', context={'form': form})
+            return render(request, 'modapp/contact.html', context={'form': form})
     else:
         form = ContactForm()
-    return render(request, 'modapp/create.html', context={'form': form})
+    return render(request, 'modapp/contact.html', context={'form': form})
 
 def post(request, id):
     fulls = FullOffer.objects.get(id=id)
     return render(request, 'modapp/post.html', context={'fulls': fulls})
+
+def create_post(request):
+    if request.method == 'GET':
+        form = PostForm()
+        return render(request, 'modapp/create.html', context={'form': form})
