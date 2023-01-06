@@ -7,7 +7,7 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_table }}
             <button type="submit" class="btn btn-primary">Сохранить</button>

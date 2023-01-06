@@ -42,3 +42,10 @@ def create_post(request):
     if request.method == 'GET':
         form = PostForm()
         return render(request, 'modapp/create.html', context={'form': form})
+    else:
+        form = PostForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mod:index'))
+        else:
+            return render(request, 'modapp/create.html', context={'form': form})

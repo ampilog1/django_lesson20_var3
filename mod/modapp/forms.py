@@ -10,6 +10,7 @@ class ContactForm(forms.Form):
 
 
 class PostForm(forms.ModelForm):
+    name = forms.CharField(label='Название')
     class Meta:
         model = Vacancy
         fields = '__all__'
