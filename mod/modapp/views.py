@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .models import FullOffer
+from .models import FullOffer, Region
 from .forms import ContactForm, PostForm
+from django.views.generic import ListView, DetailView
 from django.core.mail import send_mail
 from django.urls import reverse
 
@@ -49,3 +50,7 @@ def create_post(request):
             return HttpResponseRedirect(reverse('mod:index'))
         else:
             return render(request, 'modapp/create.html', context={'form': form})
+
+class RegionListView(ListView):
+    model = Region
+    template_name = 'region_list.html'
