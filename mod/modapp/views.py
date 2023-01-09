@@ -54,3 +54,7 @@ def create_post(request):
 class RegionListView(ListView):
     model = Region
     template_name = 'region_list.html'
+
+class FullDetailView(DetailView):
+    model = FullOffer
+    template_name = 'modapp/full_detail.html'
