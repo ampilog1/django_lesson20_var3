@@ -9,5 +9,8 @@ urlpatterns = [
     path('create/', views.create_post, name='create'),
     path('post/<int:id>/', views.post, name='post'),
     path('region-list', views.RegionListView.as_view(), name='region_list'),
-    path('full-detail/<int:pk>/', views.FullDetailView.as_view(), name='full_detail')
+    path('full-detail/<int:pk>/', views.FullDetailView.as_view(), name='full_detail'),
+    path('region-create/', views.RegionCreateView.as_view(), name='region_create'),
+    path('region-update/<int:pk>/', views.RegionUpdateView.as_view(), name='region_update'),
+    path('region-delete/<int:pk>/', views.RegionDeleteView.as_view(), name='region_delete')
 ]

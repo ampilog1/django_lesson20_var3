@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .models import FullOffer, Region
 from .forms import ContactForm, PostForm
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.mail import send_mail
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 
 # Create your views here.
@@ -54,7 +54,25 @@ def create_post(request):
 class RegionListView(ListView):
     model = Region
     template_name = 'region_list.html'
+    context_object_name = 'regions'
 
 class FullDetailView(DetailView):
     model = FullOffer
     template_name = 'modapp/full_detail.html'
+
+class RegionCreateView(CreateView):
+    model = Region
+    fields = '__all__'
+    success_url = reverse_lazy('mod:region_list')
+    template_name = 'modapp/region_create.html'
+
+class RegionUpdateView(UpdateView):
+    model = Region
+    fields = '__all__'
+    success_url = reverse_lazy('mod:region_list')
+    template_name = 'modapp/region_create.html'
+
+class RegionDeleteView(DeleteView):
+    template_name = 'modapp/region_delete_confirm.html'
+    model = Region
+    success_url = reverse_lazy('mod:region_list')
