@@ -56,9 +56,31 @@ class RegionListView(ListView):
     template_name = 'region_list.html'
     context_object_name = 'regions'
 
+    def get_context_data(self, *args, **kwargs):
+        """
+        Отвечает за передачу параметров в контекст
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        context = super().get_context_data(*args, **kwargs)
+        context['name'] = 'Регионы'
+        return context
+
 class FullDetailView(DetailView):
     model = FullOffer
     template_name = 'modapp/full_detail.html'
+
+    def get_context_data(self, *args, **kwargs):
+        """
+        Отвечает за передачу параметров в контекст
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        context = super().get_context_data(*args, **kwargs)
+        context['name'] = 'Регионы'
+        return context
 
 class RegionCreateView(CreateView):
     model = Region

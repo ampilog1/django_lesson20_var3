@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+    <h1>{{name}}</h1>
+    <div class="col-lg-8 col-md-10 mx-auto">
+        {{object.name}}
+    </div>
 
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            {{object.name}}
-        </div>
-      </div>
+
+</div>
 {% endblock %}
 
 
