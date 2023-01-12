@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Список регионов
+{% endblock %}
+
+{% block content %}
+<h1>{{name}}</h1>
+   <ul>
+       {% for item in regions %}
+       <li>
+           <a href="{% url 'mod:full_detail' pk=item.pk %}">
+               {{item.name}}
+           </a>
+           /
+           <a href="{% url 'mod:region_update' pk=item.pk %}">Изменить регион</a>
+           /
+           <a href="{% url 'mod:region_delete' pk=item.pk %}">Удалить регион</a>
+       </li>
+       {% endfor %}
+       <a href="{% url 'mod:region_create'%}">Ввести новый регион</a>
+   </ul>
+{% endblock %}
