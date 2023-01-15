@@ -1,4 +1,5 @@
 from django.db import models
+from userapp.models import BlogUser
 
 
 
@@ -6,6 +7,7 @@ from django.db import models
 # Создаем модель нашей базы данных
 class Region(models.Model):
     name = models.CharField(max_length=32, unique=True)
+    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -13,6 +15,7 @@ class Region(models.Model):
 
 class Skills(models.Model):
     name = models.CharField(max_length=32, unique=True)
+    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -21,6 +24,7 @@ class Skills(models.Model):
 class Vacancy(models.Model):
     name = models.CharField(max_length=32, unique=True)
     image = models.ImageField(upload_to='posts', null=True, blank=True)
+    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -28,6 +32,7 @@ class Vacancy(models.Model):
 
 class NumberOffer(models.Model):
     name = models.CharField(max_length=32, unique=True)
+    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
