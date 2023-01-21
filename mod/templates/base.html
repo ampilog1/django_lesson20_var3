@@ -53,16 +53,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href={% url 'mod:region_list' %}>список регионов</a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href={% url 'user:login' %}>вход</a>
-                </li>
-                <li class="nav-item">
+                    Привет, {{User.username}}
                     <a class="nav-link" href={% url 'user:logout' %}>выход</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href={% url 'user:register' %}>Регистрация</a>
                 </li>
-
+                 <li class="nav-item">
+                    <a class="nav-link" href={% url 'user:login' %}>вход</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

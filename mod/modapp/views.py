@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, HttpResponseRedirect
 from .models import FullOffer, Region
 from .forms import ContactForm, PostForm
@@ -10,6 +12,7 @@ from django.urls import reverse, reverse_lazy
 def main_view(request):
     fulls = FullOffer.objects.all()
     return render(request, 'modapp/index.html', context={'fulls': fulls})
+
 
 def contact_view(request):
     if request.method == 'POST':
@@ -35,10 +38,14 @@ def contact_view(request):
         form = ContactForm()
     return render(request, 'modapp/contact.html', context={'form': form})
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def post(request, id):
     fulls = FullOffer.objects.get(id=id)
     return render(request, 'modapp/post.html', context={'fulls': fulls})
 
+
+@login_required
 def create_post(request):
     if request.method == 'GET':
         form = PostForm()
@@ -46,10 +53,12 @@ def create_post(request):
     else:
         form = PostForm(request.POST, files=request.FILES)
         if form.is_valid():
+            form.instance.user = request.user
             form.save()
             return HttpResponseRedirect(reverse('mod:index'))
         else:
             return render(request, 'modapp/create.html', context={'form': form})
+
 
 class RegionListView(ListView):
     model = Region
@@ -67,6 +76,7 @@ class RegionListView(ListView):
         context['name'] = 'Регионы'
         return context
 
+
 class FullDetailView(DetailView):
     model = FullOffer
     template_name = 'modapp/full_detail.html'
@@ -74,6 +84,7 @@ class FullDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         """
         Отвечает за передачу параметров в контекст
+        :return:
         :param args:
         :param kwargs:
         :return:
@@ -82,17 +93,30 @@ class FullDetailView(DetailView):
         context['name'] = 'Регионы'
         return context
 
-class RegionCreateView(CreateView):
+
+class RegionCreateView(LoginRequiredMixin, CreateView):
     model = Region
     fields = '__all__'
     success_url = reverse_lazy('mod:region_list')
     template_name = 'modapp/region_create.html'
+
+    def form_valid(self, form):
+        """
+        Метод срабатывает после того как форма валидна
+        :param form:
+        :return:
+        """
+        # self.request.user - текущий пользователь
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class RegionUpdateView(UpdateView):
     model = Region
     fields = '__all__'
     success_url = reverse_lazy('mod:region_list')
     template_name = 'modapp/region_create.html'
+
 
 class RegionDeleteView(DeleteView):
     template_name = 'modapp/region_delete_confirm.html'
