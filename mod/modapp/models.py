@@ -29,6 +29,12 @@ class Vacancy(models.Model):
     def __str__(self):
         return self.name
 
+    def has_image(self):
+        return bool(self.image)
+
+    def some_method(self):
+        return 'hello from method'
+
 
 class NumberOffer(models.Model):
     name = models.CharField(max_length=32, unique=True)
