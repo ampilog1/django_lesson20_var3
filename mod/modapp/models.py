@@ -35,6 +35,9 @@ class Vacancy(models.Model):
     def some_method(self):
         return 'hello from method'
 
+    def __str__(self):
+        return f'{self.name}, user: {self.user.username}'
+
 
 class NumberOffer(models.Model):
     name = models.CharField(max_length=32, unique=True)
