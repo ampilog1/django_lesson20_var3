@@ -26,8 +26,7 @@ class Vacancy(models.Model):
     image = models.ImageField(upload_to='posts', null=True, blank=True)
     user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+
 
     def has_image(self):
         return bool(self.image)
@@ -36,7 +35,7 @@ class Vacancy(models.Model):
         return 'hello from method'
 
     def __str__(self):
-        return f'{self.name}, user: {self.user.username}'
+        return f'{self.name}'
 
 
 class NumberOffer(models.Model):
