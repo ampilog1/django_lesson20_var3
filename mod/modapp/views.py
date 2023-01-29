@@ -6,11 +6,22 @@ from .forms import ContactForm, PostForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.mail import send_mail
 from django.urls import reverse, reverse_lazy
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
 def main_view(request):
     fulls = FullOffer.objects.all()
+    paginator = Paginator(fulls, 2)
+    page = request.GET.get('page')
+    try:
+        fulls = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        fulls = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        fulls = paginator.page(paginator.num_pages)
     return render(request, 'modapp/index.html', context={'fulls': fulls})
 
 
@@ -64,6 +75,7 @@ class RegionListView(ListView):
     model = Region
     template_name = 'region_list.html'
     context_object_name = 'regions'
+    paginate_by = 2
 
     def get_context_data(self, *args, **kwargs):
         """
