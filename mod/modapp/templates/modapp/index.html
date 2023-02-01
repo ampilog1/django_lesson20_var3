@@ -8,6 +8,7 @@
 
 
     <div class="row">
+        Количество вакансий на странице: {{fulls|lenth}}
       <div class="col-lg-8 col-md-10 mx-auto">
         {% for item in fulls %}
         <div class="post-preview">
@@ -36,7 +37,29 @@
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <div class="pagination">
+
+            <span class="step-links">
+                {% if fulls.has_previous %}
+                    <a href="?page={{ fulls.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ fulls.number }} of {{ fulls.paginator.num_pages }}.
+                </span>
+
+                {% if fulls.has_next %}
+{#               <a href="?page={{ fulls.next_page_number }}">next</a> #}
+
+
+                    <a class="btn btn-primary float-right"
+                       href="?page={{ fulls.next_page_number }}">Older vacancy &rarr;</a>
+
+                {% endif %}
+
+
+            </span>
+            </div>
         </div>
       </div>
     </div>

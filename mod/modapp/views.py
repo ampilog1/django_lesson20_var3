@@ -22,7 +22,12 @@ def main_view(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         fulls = paginator.page(paginator.num_pages)
-    return render(request, 'modapp/index.html', context={'fulls': fulls})
+
+    title = 'привет'
+
+    return render(request, 'modapp/index.html', context={'fulls': fulls, 'title': title})
+
+
 
 
 def contact_view(request):
