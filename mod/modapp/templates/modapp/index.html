@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load str_extensions %}
 
 {% block title %}
    Главная страница
@@ -8,7 +9,7 @@
 
 
     <div class="row">
-        Количество вакансий на странице: {{fulls|lenth}}
+
       <div class="col-lg-8 col-md-10 mx-auto">
         {% for item in fulls %}
         <div class="post-preview">
