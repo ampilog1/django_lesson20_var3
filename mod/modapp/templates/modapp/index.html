@@ -11,31 +11,33 @@
     <div class="row">
 
       <div class="col-lg-8 col-md-10 mx-auto">
-        {% for item in fulls %}
-        <div class="post-preview">
-          <a href="{% url 'mod:post' id=item.id %}">
-            <h2 class="post-title">
-              {{ item.VACANCY }}
-            </h2>
-            <h3 class="post-subtitle">
-              {{ item.REGION }}
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019
-           {% if item.has_image %}
-                Есть картинка
-                {% else%}
-                Нет картинки
-            {% endif %}
-            {{item.has_image}}
-              {{item.some_method}}
-          </p>
-        </div>
-        <hr>
-        {% endfor %}
 
+          {% with cash_fulls=fulls %}
+                {% for item in cash_fulls %}
+                <div class="post-preview">
+                  <a href="{% url 'mod:post' id=item.id %}">
+                    <h2 class="post-title">
+                      {{ item.VACANCY }}
+                    </h2>
+                    <h3 class="post-subtitle">
+                      {{ item.REGION }}
+                    </h3>
+                  </a>
+                  <p class="post-meta">Posted by
+                    <a href="#">Start Bootstrap</a>
+                    on September 24, 2019
+                   {% if item.has_image %}
+                        Есть картинка
+                        {% else%}
+                        Нет картинки
+                    {% endif %}
+                    {{item.has_image}}
+                      {{item.some_method}}
+                  </p>
+                </div>
+                <hr>
+                {% endfor %}
+          {% endwith %}
         <!-- Pager -->
         <div class="clearfix">
           <div class="pagination">
