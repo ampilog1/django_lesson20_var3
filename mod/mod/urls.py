@@ -18,10 +18,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from modapp.api_views import RegionViewSet
+from modapp.api_views import RegionViewSet, SkillsViewSet
 
 router = routers.DefaultRouter()
 router.register(r'regions', RegionViewSet)
+router.register(r'skills', SkillsViewSet)
 
 
 urlpatterns = [
@@ -29,7 +30,8 @@ urlpatterns = [
     path('', include('modapp.urls', namespace='mod')),
     path('user/', include('userapp.urls', namespace='user')),
     path('api-auth/', include('rest_framework.urls')),
-    path('regions/', include(router.urls))
+    path('api/', include(router.urls)),
+    # path('skills/', include(router.urls))
 
 ]
 

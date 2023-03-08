@@ -7,7 +7,7 @@ from userapp.models import BlogUser
 # Создаем модель нашей базы данных
 class Region(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
+    # user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -15,7 +15,7 @@ class Region(models.Model):
 
 class Skills(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
+    # user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
