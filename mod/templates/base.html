@@ -57,7 +57,7 @@
 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    Привет, {{User.username}}
+                    Привет, <a href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a>
                     <a class="nav-link" href={% url 'user:logout' %}>выход</a>
                 </li>
                 {% else %}
