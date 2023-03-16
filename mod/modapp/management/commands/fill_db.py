@@ -31,17 +31,17 @@ class Command(BaseCommand):
         for row in cursor.execute('SELECT number_offer, vacancy, region, skill FROM full_offer ORDER BY number_offer'):
             full_offer_list.append(row)
 # Заполняем  базу через нашу модель
-        # for reg in region_sql:
-        #     region1 = Region.objects.create(name=reg[0])
-        #
-        # for ski in skills_sql:
-        #     skills1 = Skills.objects.create(name=ski[0])
-        #
-        # for vac in vacancy_sql:
-        #     vacancy1 = Vacancy.objects.create(name=vac[0])
-        #
-        # for num in number_offer_sql:
-        #     number_offer1 = NumberOffer.objects.create(name=num[0])
+        for reg in region_sql:
+            region1 = Region.objects.create(name=reg[0])
+
+        for ski in skills_sql:
+            skills1 = Skills.objects.create(name=ski[0])
+
+        for vac in vacancy_sql:
+            vacancy1 = Vacancy.objects.create(name=vac[0])
+
+        for num in number_offer_sql:
+            number_offer1 = NumberOffer.objects.create(name=num[0])
 
         # for ful in full_offer_list:
         # full_offer1 = FullOffer.objects.all()

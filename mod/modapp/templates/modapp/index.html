@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load str_extensions %}
+
+{% block title %}
+   Главная страница
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+          {% with cash_fulls=fulls %}
+                {% for item in cash_fulls %}
+                <div class="post-preview">
+                  <a href="{% url 'mod:post' id=item.id %}">
+                    <h2 class="post-title">
+                      {{ item.VACANCY }}
+                    </h2>
+                    <h3 class="post-subtitle">
+                      {{ item.REGION }}
+                    </h3>
+                  </a>
+                  <p class="post-meta">Posted by
+                    <a href="#">Start Bootstrap</a>
+                    on September 24, 2019
+                   {% if item.has_image %}
+                        Есть картинка
+                        {% else%}
+                        Нет картинки
+                    {% endif %}
+                    {{item.has_image}}
+                      {{item.some_method}}
+                  </p>
+                </div>
+                <hr>
+                {% endfor %}
+          {% endwith %}
+        <!-- Pager -->
+        <div class="clearfix">
+          <div class="pagination">
+
+            <span class="step-links">
+                {% if fulls.has_previous %}
+                    <a href="?page={{ fulls.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ fulls.number }} of {{ fulls.paginator.num_pages }}.
+                </span>
+
+                {% if fulls.has_next %}
+{#               <a href="?page={{ fulls.next_page_number }}">next</a> #}
+
+
+                    <a class="btn btn-primary float-right"
+                       href="?page={{ fulls.next_page_number }}">Older vacancy &rarr;</a>
+
+                {% endif %}
+
+
+            </span>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+
